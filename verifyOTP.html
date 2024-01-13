@@ -1,0 +1,116 @@
+<!-- views/otpVerification.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>OTP Verification</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        /* Add your custom styles here */
+        .otp-input {
+            width: 40px;
+            text-align: center;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="text-center">OTP Verification</h4>
+                        <div class="container mt-3">
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <b>Note:</b> The verification email may be in your spam folder. Please check your spam
+                                folder if you don't receive the email in your inbox.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- <div class="container mt-3">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                Failed to connect
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="card-body">
+                        <form action="/verify-email" method="POST">
+                            <div class="form-group text-center">
+                                <label for="otp">Enter OTP:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control otp-input" name="otp1" id="otp1"
+                                        maxlength="1" pattern="\d" required>
+                                    <input type="text" class="form-control otp-input" name="otp2" id="otp2"
+                                        maxlength="1" pattern="\d" required>
+                                    <input type="text" class="form-control otp-input" name="otp3" id="otp3"
+                                        maxlength="1" pattern="\d" required>
+                                    <input type="text" class="form-control otp-input" name="otp4" id="otp4"
+                                        maxlength="1" pattern="\d" required>
+                                    <input type="text" class="form-control otp-input" name="otp5" id="otp5"
+                                        maxlength="1" pattern="\d" required>
+                                    <input type="text" class="form-control otp-input" name="otp6" id="otp6"
+                                        maxlength="1" pattern="\d" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Verify OTP</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- views/otpVerification.ejs -->
+    <!-- ... (previous HTML code) ... -->
+
+    <script>
+        $(document).ready(function () {
+            let otpEntered = false;
+
+            // Move to the next input on input
+            $('.otp-input').on('input', function () {
+                const maxLength = parseInt($(this).attr('maxlength'));
+                const currentLength = $(this).val().length;
+
+                if (currentLength === maxLength) {
+                    const nextInput = $(this).next('.otp-input');
+                    if (nextInput.length) {
+                        nextInput.focus();
+                    } else {
+                        // If it's the last input, set otpEntered to true
+                        otpEntered = true;
+                    }
+                }
+            });
+
+            // Move to the previous input on backspace
+            $('.otp-input').on('keydown', function (e) {
+                const keyCode = e.keyCode || e.which;
+
+                if (keyCode === 8 && $(this).val().length === 0) {
+                    $(this).prev('.otp-input').focus();
+                }
+            });
+        });
+    </script>
+
+    <!-- ... (remaining HTML code) ... -->
+
+
+</body>
+
+</html>

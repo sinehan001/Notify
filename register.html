@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Skydash Admin</title>
+    <!-- plugins:css -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./dashboard/vendors/feather/feather.css">
+    <link rel="stylesheet" href="./dashboard/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="./dashboard/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="./dashboard/css/vertical-layout-light/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="./dashboard/images/favicon.png" />
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .form-group {
+            position: relative;
+        }
+
+        .eye-icon {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        .social {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .social div {
+            background: red;
+            width: 150px;
+            border-radius: 3px;
+            padding: 5px 10px 10px 5px;
+            background-color: crimson;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .social div:nth-child(2) {
+            background-color: darkslateblue;
+        }
+
+        .social div:hover {
+            opacity: 0.7;
+        }
+
+        .social .fb {
+            margin-left: 25px;
+        }
+
+        .social i {
+            margin-right: 4px;
+        }
+        .border-line {
+            border-right: 3px solid #4B49AC;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-scroller">
+        <div class="container-fluid page-body-wrapper full-page-wrapper">
+            <div class="content-wrapper d-flex align-items-center auth px-0">
+                <div class="row w-100 mx-0">
+                    <div class="col-lg-6 d-none d-lg-block my-auto">
+                        <img src="assets/img/1705055392008.png" class="img-fluid" alt="banner" />
+                    </div>
+                    <!-- <div class="col-md-4 col-lg-6 col-xl-5 m-auto border-line">
+                        <img src="assets/img/1705055392008.png"
+                            class="img-fluid auth-form-light" alt="Sample image">
+                    </div> -->
+                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto my-auto">
+                        <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                            <div class="brand-logo">
+                                <h1 class="logo me-auto"><img src="./assets/img/N-logo.svg" alt="logo" /><a
+                                        href="index.html">Notify</a></h1>
+                            </div>
+                            <h4>New here?</h4>
+                            <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
+                            <form class="pt-3" id="registerForm">
+                                <div class="form-group">
+                                    <input type="email" class="form-control form-control-lg" id="email"
+                                        placeholder="Email Address" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control form-control-lg" id="password"
+                                        placeholder="Password" required>
+                                    <i class="bi bi-eye eye-icon" id="togglePassword"></i>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control form-control-lg" id="confirmPassword"
+                                        placeholder="Confirm Password" required>
+                                    <i class="bi bi-eye eye-icon" id="togglePassword1"></i>
+                                    <div class="invalid-feedback">Password doesn't match</div>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="form-check">
+                                        <label class="form-check-label text-muted">
+                                            <input type="checkbox" class="form-check-input" required>
+                                            I agree to all Terms & Conditions
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <button type="submit"
+                                        class="btn btn-primary btn-lg btn-block">SIGN UP</button>
+                                    <!-- <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
+                                        href="./dashboard/index.html">SIGN UP</a> -->
+                                </div>
+                                <div class="text-center mt-4 font-weight-light">
+                                    Already have an account? <a href="login.html" class="text-primary">Login</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="./dashboard/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="./dashboard/js/off-canvas.js"></script>
+    <script src="./dashboard/js/hoverable-collapse.js"></script>
+    <script src="./dashboard/js/template.js"></script>
+    <script src="./dashboard/js/settings.js"></script>
+    <script src="./dashboard/js/todolist.js"></script>
+    <!-- endinject -->
+    <script>
+        const registerForm = document.getElementById("registerForm");
+        const email = document.getElementById("email");
+        const password = document.getElementById("password");
+        const confirmPassword = document.getElementById("confirmPassword");
+        const feedback = document.querySelector(".invalid-feedback");
+        registerForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            if (password.value !== confirmPassword.value) {
+                feedback.style.display = "block";
+            }
+            else {
+                feedback.style.display = "none";
+                window.location.href = "/verifyOTP.html";
+            }
+        });
+
+        var passwordInput = document.getElementById('password');
+        var confirmPasswordInput = document.getElementById('confirmPassword');
+        var togglePasswordIcon = document.getElementById('togglePassword');
+        var togglePasswordIcon1 = document.getElementById('togglePassword1');
+
+        togglePasswordIcon.addEventListener('click', function () {
+            passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+            // Change eye icon based on password visibility
+            togglePasswordIcon.classList.toggle('bi-eye');
+            togglePasswordIcon.classList.toggle('bi-eye-slash');
+        });
+
+        togglePasswordIcon1.addEventListener('click', function () {
+            confirmPasswordInput.type = confirmPasswordInput.type === 'password' ? 'text' : 'password';
+            // Change eye icon based on password visibility
+            togglePasswordIcon1.classList.toggle('bi-eye');
+            togglePasswordIcon1.classList.toggle('bi-eye-slash');
+        });
+
+    </script>
+</body>
+
+</html>
