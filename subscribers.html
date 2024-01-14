@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Websites - Notify</title>
+    <title>subscribers - Notify</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="dashboard/vendors/feather/feather.css">
     <link rel="stylesheet" href="dashboard/vendors/ti-icons/css/themify-icons.css">
@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="dashboard/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="dashboard/vendors/ti-icons/css/themify-icons.css">
     <link rel="stylesheet" type="text/css" href="dashboard/js/select.dataTables.min.css">
+    <link rel="stylesheet" href="dashboard/vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="dashboard/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="dashboard/css/vertical-layout-light/style.css">
@@ -148,13 +150,13 @@
                             <span class="menu-title">Dashboard</span>
                         </a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="websites.html">
                             <i class="bi bi-window-stack menu-icon"></i>
                             <span class="menu-title">Websites</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="subscribers.html">
                             <i class="bi bi-people menu-icon"></i>
                             <span class="menu-title">Subscribers</span>
@@ -205,15 +207,8 @@
                         <div class="col-md-12 grid-margin">
                             <div class="row">
                                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                                    <h3 class="font-weight-bold">Websites</h3>
-                                    <h6 class="font-weight-normal mb-0">Monitor your Notifications in Websites</h6>
-                                </div>
-                                <div class="col-12 col-xl-4">
-                                    <div class="justify-content-end d-flex">
-                                        <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                                            <button class="btn btn-primary font-weight-bold float-right">Add Website</button>
-                                        </div>
-                                    </div>
+                                    <h3 class="font-weight-bold">Subscribers</h3>
+                                    <h6 class="font-weight-normal mb-0">View all your Subscribers</h6>
                                 </div>
                             </div>
                         </div>
@@ -222,18 +217,22 @@
                         <div class="col-md-12 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
-                                    <p class="card-title">Websites</p>
+                                    <p class="card-title">Subscribers</p>
                                     <div class="row">
                                         <div class="col-12">
+                                            <select class="js-example-basic-single subscribers-select-data w-100"
+                                                id="subscribers-select-data">
+                                            </select><br /><br />
                                             <div class="table-responsive">
-                                                <table id="websiteData" class="display expandable-table" style="width:100%">
+                                                <table id="subscribersData" class="display expandable-table w-100">
                                                     <thead>
                                                         <tr>
                                                             <th>S. No</th>
-                                                            <th>Name</th>
-                                                            <th>Website URL</th>
-                                                            <th>Status</th>
-                                                            <th>Subscribers</th>
+                                                            <th>Subscriber ID</th>
+                                                            <th>Date</th>
+                                                            <th>Time</th>
+                                                            <th>Location</th>
+                                                            <th>Type</th>
                                                             <th>Actions</th>
                                                         </tr>
                                                     </thead>
@@ -289,7 +288,108 @@
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
     <script src="dashboard/js/dashboard.js"></script>
     <script src="dashboard/js/Chart.roundedBarCharts.js"></script>
+    <script src="dashboard/vendors/typeahead.js/typeahead.bundle.min.js"></script>
+    <script src="dashboard/vendors/select2/select2.min.js"></script>
     <!-- End custom js for this page-->
+    <script>
+        (function ($) {
+            'use strict';
+
+            function populateTable(selectedWebsite) {
+                // Find the selected website in the data
+                const selectedWebsiteData = data.websites.find(website => website.url === selectedWebsite);
+                console.log(selectedWebsiteData);
+
+                // Populate the table with the subscriber data
+                $('#subscribersData').DataTable({
+                    destroy: true,
+                    data: selectedWebsiteData.data,
+                    columns: [
+                        { data: null, render: function (data, type, row, meta) { return meta.row + 1; } },
+                        { data: 'subscriber_id' },
+                        { data: 'date' },
+                        { data: 'time' },
+                        { data: 'location' },
+                        { data: 'type' },
+                        {
+                            data: null,
+                            render: function (data, type, row) {
+                                return '<button class="btn btn-danger ml-2 p-2" data-toggle="tooltip" data-placement="right" title="Delete"  onclick="deleteRow(' + row.id + ')"><i class="bi bi-trash mr-0"></i></button>';
+                            }
+                        }
+                    ],
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copy',
+                        {
+                            extend: 'csv',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5] // Adjust the column indices accordingly
+                            }
+                        },
+                        {
+                            extend: 'excel',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5] // Adjust the column indices accordingly
+                            }
+                        },
+                        {
+                            extend: 'pdf',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5] // Adjust the column indices accordingly
+                            }
+                        },
+                        {
+                            extend: 'print',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5] // Adjust the column indices accordingly
+                            }
+                        },
+                    ]
+                });
+            }
+
+            if ($(".subscribers-select-data").length) {
+                $(".subscribers-select-data").select2();
+            }
+
+            $.ajax({
+                url: 'dashboard/js/subscribers.txt',
+                dataType: 'json',
+                success: function (data) {
+
+                    window.data = data;
+
+                    // Get the select element
+                    const selectElement = document.getElementById("subscribers-select-data");
+                    const defaultSelectedURL = data.websites[0].url;
+
+                    // Loop through the data and add options to the select element
+                    data.websites.forEach(website => {
+                        const optionElement = document.createElement("option");
+                        optionElement.value = website.url;
+                        optionElement.textContent = website.name;
+                        selectElement.appendChild(optionElement);
+                    });
+
+                    populateTable(defaultSelectedURL);
+
+                    // Initialize Select2
+                    $(document).ready(function () {
+                        $('.subscribers-select-data').select2();
+                    });
+                },
+                error: function (error) {
+                    console.error('Error fetching data:', error);
+                }
+            });
+
+            $('#subscribers-select-data').on('change', function () {
+                const selectedWebsite = $(this).val();
+                populateTable(selectedWebsite);
+            });
+        })(jQuery);
+    </script>
 </body>
 
 </html>

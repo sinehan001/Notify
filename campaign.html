@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Websites - Notify</title>
+    <title>Campaign - Notify</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="dashboard/vendors/feather/feather.css">
     <link rel="stylesheet" href="dashboard/vendors/ti-icons/css/themify-icons.css">
@@ -19,7 +19,7 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="dashboard/css/vertical-layout-light/style.css">
     <!-- endinject -->
-    <link rel="shortcut icon" href="assets/img/favicon.png" />
+    <<link rel="shortcut icon" href="assets/img/favicon.png" />
     <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
 </head>
 
@@ -148,7 +148,7 @@
                             <span class="menu-title">Dashboard</span>
                         </a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="websites.html">
                             <i class="bi bi-window-stack menu-icon"></i>
                             <span class="menu-title">Websites</span>
@@ -160,7 +160,7 @@
                             <span class="menu-title">Subscribers</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="campaign.html">
                             <i class="bi bi-send-arrow-up menu-icon"></i>
                             <span class="menu-title">Campaign</span>
@@ -205,13 +205,14 @@
                         <div class="col-md-12 grid-margin">
                             <div class="row">
                                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                                    <h3 class="font-weight-bold">Websites</h3>
-                                    <h6 class="font-weight-normal mb-0">Monitor your Notifications in Websites</h6>
+                                    <h3 class="font-weight-bold">Campaign</h3>
+                                    <h6 class="font-weight-normal mb-0">Automate your Notifications in Websites</h6>
                                 </div>
                                 <div class="col-12 col-xl-4">
                                     <div class="justify-content-end d-flex">
                                         <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                                            <button class="btn btn-primary font-weight-bold float-right">Add Website</button>
+                                            <button class="btn btn-primary font-weight-bold float-right">Add
+                                                Campaign</button>
                                         </div>
                                     </div>
                                 </div>
@@ -222,18 +223,21 @@
                         <div class="col-md-12 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
-                                    <p class="card-title">Websites</p>
+                                    <p class="card-title">Campaign</p>
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="table-responsive">
-                                                <table id="websiteData" class="display expandable-table" style="width:100%">
+                                                <table id="campaignData" class="display expandable-table"
+                                                    style="width:100%">
                                                     <thead>
                                                         <tr>
                                                             <th>S. No</th>
-                                                            <th>Name</th>
-                                                            <th>Website URL</th>
-                                                            <th>Status</th>
+                                                            <th>Campaign ID</th>
+                                                            <th>Campaign</th>
+                                                            <th>Date & Time</th>
                                                             <th>Subscribers</th>
+                                                            <th>Received</th>
+                                                            <th>Status</th>
                                                             <th>Actions</th>
                                                         </tr>
                                                     </thead>
@@ -290,6 +294,62 @@
     <script src="dashboard/js/dashboard.js"></script>
     <script src="dashboard/js/Chart.roundedBarCharts.js"></script>
     <!-- End custom js for this page-->
+    <script>
+        (function ($) {
+            'use strict';
+
+            $('#campaignData').DataTable({
+                "ajax": {
+                    "url": 'dashboard/js/campaign.txt',
+                    "dataSrc": "data"
+                },
+                "columns": [
+                    { data: null, render: function (data, type, row, meta) { return meta.row + 1; } },
+                    { data: 'campaign_id' },
+                    { data: 'name' },
+                    { data: 'date' },
+                    { data: 'subscribers' },
+                    { data: 'received' },
+                    { data: 'status' },
+                    {
+                        data: null,
+                        render: function (data, type, row) {
+                            return '<button class="btn btn-danger ml-2 p-2" data-toggle="tooltip" data-placement="right" title="Delete"  onclick="deleteRow(' + row.id + ')"><i class="bi bi-trash mr-0"></i></button>';
+                        }
+                    },
+                ],
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy',
+                    {
+                        extend: 'csv',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6] // Adjust the column indices accordingly
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6] // Adjust the column indices accordingly
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6] // Adjust the column indices accordingly
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6] // Adjust the column indices accordingly
+                        }
+                    },
+                ]
+
+            });
+        })(jQuery);
+    </script>
 </body>
 
 </html>

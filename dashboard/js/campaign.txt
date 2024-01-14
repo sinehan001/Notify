@@ -1,0 +1,28 @@
+{
+    "data": [
+        {
+            "campaign_id": 1,
+            "name": "my campaign",
+            "date": "27 Dec 2023 | 05:00 pm",
+            "subscribers":200,
+            "received": 190,
+            "status": "Completed"
+        },
+        {
+            "campaign_id": 2,
+            "name": "my campaign",
+            "date": "27 Jan 2024 | 05:00 pm",
+            "subscribers":50,
+            "received": 0,
+            "status": "Scheduled"
+        },
+        {
+            "campaign_id": 3,
+            "name": "my campaign",
+            "date": "27 Feb 2024 | 05:00 pm",
+            "subscribers":300,
+            "received": 0,
+            "status": "Scheduled"
+        }
+    ]
+}

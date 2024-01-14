@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Websites - Notify</title>
+    <title>Statistics - Notify</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="dashboard/vendors/feather/feather.css">
     <link rel="stylesheet" href="dashboard/vendors/ti-icons/css/themify-icons.css">
@@ -28,9 +28,8 @@
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo mr-5" href="index.html">
-                    <h2 class="lemon"><img src="assets/img/N-logo.svg" class="mr-2" alt="logo" />Notify</h2>
-                </a>
+                <a class="navbar-brand brand-logo mr-5" href="index.html"><h2 class="lemon"><img src="assets/img/N-logo.svg"
+                    class="mr-2" alt="logo" />Notify</h2></a>
                 <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/img/N-logo.svg"
                         alt="logo" /></a>
             </div>
@@ -148,7 +147,7 @@
                             <span class="menu-title">Dashboard</span>
                         </a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="websites.html">
                             <i class="bi bi-window-stack menu-icon"></i>
                             <span class="menu-title">Websites</span>
@@ -166,7 +165,7 @@
                             <span class="menu-title">Campaign</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="statistics.html">
                             <i class="bi bi-bar-chart-line-fill menu-icon"></i>
                             <span class="menu-title">Statistics</span>
@@ -205,42 +204,54 @@
                         <div class="col-md-12 grid-margin">
                             <div class="row">
                                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                                    <h3 class="font-weight-bold">Websites</h3>
-                                    <h6 class="font-weight-normal mb-0">Monitor your Notifications in Websites</h6>
-                                </div>
-                                <div class="col-12 col-xl-4">
-                                    <div class="justify-content-end d-flex">
-                                        <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                                            <button class="btn btn-primary font-weight-bold float-right">Add Website</button>
-                                        </div>
-                                    </div>
+                                    <h3 class="font-weight-bold">Statistics</h3>
+                                    <h6 class="font-weight-normal mb-0">View your Notifications Statistics</h6>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 grid-margin stretch-card">
+                        <div class="col-md-12 col-lg-6 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
-                                    <p class="card-title">Websites</p>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="table-responsive">
-                                                <table id="websiteData" class="display expandable-table" style="width:100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>S. No</th>
-                                                            <th>Name</th>
-                                                            <th>Website URL</th>
-                                                            <th>Status</th>
-                                                            <th>Subscribers</th>
-                                                            <th>Actions</th>
-                                                        </tr>
-                                                    </thead>
-                                                </table>
-                                            </div>
+                                    <p class="card-title">Usage Details</p>
+                                    <p class="font-weight-500">The total number of sessions within the date range. It is
+                                        the period time a user is actively engaged with your website, page or app, etc
+                                    </p>
+                                    <div class="d-flex flex-wrap mb-5">
+                                        <div class="mr-5 mt-3">
+                                            <p class="text-muted">Notifications Sent</p>
+                                            <h3 class="text-primary fs-30 font-weight-medium">300</h3>
+                                        </div>
+                                        <div class="mr-5 mt-3">
+                                            <p class="text-muted">Notifications Received</p>
+                                            <h3 class="text-primary fs-30 font-weight-medium">270</h3>
+                                        </div>
+                                        <div class="mr-5 mt-3">
+                                            <p class="text-muted">Notifications Failed</p>
+                                            <h3 class="text-primary fs-30 font-weight-medium">30</h3>
+                                        </div>
+                                        <div class="mr-5 mt-3">
+                                            <p class="text-muted">Success Ratio</p>
+                                            <h3 class="text-primary fs-30 font-weight-medium">90%</h3>
                                         </div>
                                     </div>
+                                    <canvas id="order-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <p class="card-title">Monthly Report</p>
+                                        <a href="/statistics.html" class="text-info">View Statistics</a>
+                                    </div>
+                                    <p class="font-weight-500">The total number of sessions within the date range. It is
+                                        the period time a user is actively engaged with your website, page or app, etc
+                                    </p>
+                                    <div id="sales-legend" class="chartjs-legend mt-4 mb-2"></div>
+                                    <canvas id="sales-chart"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -279,14 +290,6 @@
     <script src="dashboard/js/todolist.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page-->
-
-    <!-- DataTables Buttons JS -->
-    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
     <script src="dashboard/js/dashboard.js"></script>
     <script src="dashboard/js/Chart.roundedBarCharts.js"></script>
     <!-- End custom js for this page-->

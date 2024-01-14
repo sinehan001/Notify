@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "name": "E-Circle Hub",
+      "url": "https://e-circle.000webhostapp.com",
+      "subscribers": 2,
+      "verified": true
+    },
+    {
+      "id": "2",
+      "name": "Eventally",
+      "url": "https://eventally.000webhostapp.com",
+      "subscribers": 0,
+      "verified": false
+    },
+    {
+      "id": "3",
+      "name": "Horizon",
+      "url": "https://horizon.000webhostapp.com",
+      "subscribers": 5,
+      "verified": true
+    }
+  ]
+}

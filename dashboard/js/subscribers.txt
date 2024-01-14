@@ -1,0 +1,52 @@
+{
+  "websites": [
+    {
+      "name": "E-Circle Hub",
+      "url": "https://e-circle.000webhostapp.com",
+      "subscribers": 2,
+      "data": [
+        {
+          "subscriber_id": "12345",
+          "date": "2024-01-14",
+          "time": "15:30:00",
+          "location": "City A",
+          "type": "News"
+        },
+        {
+          "subscriber_id": "67890",
+          "date": "2024-01-15",
+          "time": "12:45:00",
+          "location": "City B",
+          "type": "Events"
+        }
+      ]
+    },
+    {
+      "name": "Eventally",
+      "url": "https://eventally.000webhostapp.com",
+      "subscribers": 0,
+      "data": []
+    },
+    {
+      "name": "Horizon",
+      "url": "https://horizon.000webhostapp.com",
+      "subscribers": 2,
+      "data": [
+        {
+          "subscriber_id": "54321",
+          "date": "2024-01-14",
+          "time": "18:00:00",
+          "location": "City C",
+          "type": "Blog"
+        },
+        {
+          "subscriber_id": "98765",
+          "date": "2024-01-16",
+          "time": "09:15:00",
+          "location": "City D",
+          "type": "Podcast"
+        }
+      ]
+    }
+  ]
+}
